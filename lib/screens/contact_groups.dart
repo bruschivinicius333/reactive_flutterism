@@ -139,3 +139,24 @@ class _ContactGroupsView extends StatelessWidget {
     );
   }
 }
+
+/// This sidebar component reuses the `_ContactGroupsView` and provides a different callback. Instead of navigating, it calls `onListSelected` with the ID of the tapped list. It also passes the `selectedListId` to `_ContactGroupsView` so that the selected item can be highlighted.
+class ContactGroupsSidebar extends StatelessWidget {
+  const ContactGroupsSidebar({
+    super.key,
+    required this.selectedListId,
+    required this.onListSelected,
+  });
+
+  final int selectedListId;
+  final void Function(int) onListSelected;
+
+  @override
+  Widget build(BuildContext context) {
+    return _ContactGroupsView(
+      selectedListId: selectedListId,
+      onListSelected: (list) => onListSelected(list.id),
+    );
+  }
+}
+

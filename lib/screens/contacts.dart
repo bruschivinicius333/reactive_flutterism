@@ -105,3 +105,15 @@ class ContactListSection extends StatelessWidget {
     );
   }
 }
+
+/// A detail view that doesn't show navigation controls, for a large screen layout.
+class ContactListDetail extends StatelessWidget {
+  const ContactListDetail({super.key, required this.listId});
+
+  final int listId;
+
+  @override
+  Widget build(BuildContext context) {
+    return _ContactListView(listId: listId, automaticallyImplyLeading: false);
+  }
+}
