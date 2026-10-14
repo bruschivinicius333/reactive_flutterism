@@ -32,7 +32,7 @@ class _AdaptiveLayoutState extends State<AdaptiveLayout> {
         if (isLargeScreen) {
           return _buildLargeScreenLayout();
         } else {
-          return const ContactListsPage(listId: 0);
+          return const ContactGroupsPage();
         }
       }
     );    
@@ -60,10 +60,15 @@ class ContactGroupsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return _ContactGroupsView(
-      selectedListId: 0,
-      onListSelected: (list) {
-        debugPrint(list.toString());
-      }      
+      /// `Navigator.of(context)` retrieves the nearest `Navigator` widget from the widget tree. The `push` method adds a new route to the navigator's stack, and displays the widget returned from the `builder` property.
+      
+      /// This is the most basic implementation of using stack-based navigation, where new screens are pushed on top of the current screen. To navigate back to the previous screen, you'd use the `Navigator.pop` method.
+      onListSelected: (list) => Navigator.of(context).push(
+        CupertinoPageRoute<void>(
+          title: list.title,
+          builder: (context) => ContactListsPage(listId: list.id),
+        ),
+      ),      
     );
   }
 }
